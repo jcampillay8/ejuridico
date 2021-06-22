@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Administrador</title>
+</head>
+
+<body>
+
+    <div class="container">
+        {% include "user_bar.html" %}
+
+        dashboard administrador
+
+        <a href="/administrator/new_user" class="btn btn-warning">Ingresar Nuevo Usuario</a>
+
+
+     
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Seg Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Segundo appellido</th>
+                    <th scope="col">Rut</th>
+                    <th scope="col">email</th>
+                    <th scope="col">Tipo de usuario</th>
+                    <th scope="col">Acción</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in all_users.all %}
+                <tr>
+
+                    <td>{{user.first_name1}}</td>
+                    <td>{{user.first_name2}}</td>
+                    <td>{{user.last_name1}}</td>
+                    <td>{{user.last_name2}}</td>
+                    <td>{{user.rut}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.type.type_name}}</td>
+                    <td><a href="delete_user/{{user.id}}">Borrar Usuario</a></td>
+
+
+                </tr>
+                {% endfor%}
+
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+</body>
+
+</html>

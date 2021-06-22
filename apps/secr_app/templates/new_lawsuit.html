@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Demanda</title>
+
+    <script>
+        function isInputNumber(evt) {
+            var ch = String.fromCharCode(evt.which);
+            if (!(/[0-9-k]/.test(ch))) {
+                evt.preventDefault();
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        {% include "user_bar.html" %}
+
+        <h2 class="text-muted">Nueva demanda en E-Jurídico</h2>
+        <div class="row">
+
+            <a href="/">Atrás</a>
+            <div class="row ">
+
+                <form action="create_lawsuit" method="POST" class="m-2  bg-light row justify-content-center" id="formulario"
+                    target="_blank">
+                    {% csrf_token %}
+                    <div class="col-5 border mt-4">
+                        <h5 class="text-center">Datos del demandado</h5>
+                        {{defendantform.as_p}}
+                    </div>
+                    <div class="col-5 border mt-4 ms-4">
+                        <h5 class="text-center">Datos de la demanda</h5>
+                        {{lawsuitform.as_p}}
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <button type='submit' class="btn btn-primary m-2 col-auto" id="boton">Crear Demanda</button>
+                    </div>
+
+                </form>
+                
+
+
+            </div>
+
+
+            <a href="/">Atrás</a>
+        </div>
+
+
+
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="jquery.rut.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#rut").rut();
+                $("form#multiple-objetos input").rut({ formatOn: 'keyup' });
+                // $("form#formato-live input").rut({ formatOn: 'keyup' });
+                $("#rut").rut({ formatOn: 'keyup' }); //formatea el rut 
+                $("form#validacion-live input").rut({ formatOn: 'keyup', validateOn: 'keyup' }).on('rutInvalido', function () { $(this).parents(".control-group").addClass("error") }).on('rutValido', function () { $(this).parents(".control-group").removeClass("error") });
+                $("form#extraer-cuerpo input").rut().on('rutValido', function (e, rut) { alert("Su RUT sin DV es " + rut); });
+                $("form#multiple-events input").rut({ validateOn: 'keyup change' }).on('rutInvalido', function () { $(this).parents(".control-group").addClass("error") }).on('rutValido', function () { $(this).parents(".control-group").removeClass("error") });
+            });
+        </script>
+        <!-- <script>
+            window.open('/', '#boton'); 
+        </script> -->
+        <script> // trasnforma los montos a formato número (sin decimales)
+            $("#monto1, #monto2").on('keyup', function () {
+                var n = parseInt($(this).val().replace(/\D/g, ''), 10);
+                $(this).val(n.toLocaleString());
+                //do something else as per updated question
+                myFunc(); //call another function too
+            });
+        </script>
+
+
+        <!-- <script>
+            $(document).ready(function () {
+
+                $("#formulario").submit(function (e) {
+
+                    //stop submitting the form to see the disabled button effect
+                    e.preventDefault();
+
+                    //disable the submit button
+                  
+
+                    //disable a normal button
+                    $("#boton").attr("disabled", true);
+
+                    return true;
+
+                });
+            });
+        </script> -->
+        <script src="{% static 'jquery.rut.js' %}"></script>
+        <script src="../../users_app/static/jquery.rut.js"></script>
+</body>

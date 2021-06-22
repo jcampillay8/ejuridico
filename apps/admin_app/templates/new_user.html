@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <script>
+        function isInputNumber(evt) {
+            var ch = String.fromCharCode(evt.which);
+            if (!(/[0-9-k]/.test(ch))) {
+                evt.preventDefault();
+            }
+        }
+    </script>
+    <title>Nuevo Usuario</title>
+</head>
+
+<body>
+
+    <div class="container">
+        {% include "user_bar.html" %}
+
+        <h2 class="text-muted">Nuevo usuario en E-Jurídico</h2>
+        <div class="row">
+            <a href="/">Atrás</a>
+            <div class="col-4 bg-light p-2 border ">
+                <form action="/administrator/new_user" method="POST" class="m-2 ">
+                    {% csrf_token %}
+                    {{userform.as_p}}
+                    <button type='submit' class="btn btn-primary col-auto m-2">Registrar Usuario</button>
+                </form>
+            </div>
+            <a href="/">Atrás</a>
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+ 
+
+
+
+
+
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="jquery.rut.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("form#basico input").rut();
+            $("form#multiple-objetos input").rut({ formatOn: 'keyup' });
+            // $("form#formato-live input").rut({ formatOn: 'keyup' });
+            $("#rut").rut({ formatOn: 'keyup' });
+            $("form#validacion-live input").rut({ formatOn: 'keyup', validateOn: 'keyup' }).on('rutInvalido', function () { $(this).parents(".control-group").addClass("error") }).on('rutValido', function () { $(this).parents(".control-group").removeClass("error") });
+            $("form#extraer-cuerpo input").rut().on('rutValido', function (e, rut) { alert("Su RUT sin DV es " + rut); });
+            $("form#multiple-events input").rut({ validateOn: 'keyup change' }).on('rutInvalido', function () { $(this).parents(".control-group").addClass("error") }).on('rutValido', function () { $(this).parents(".control-group").removeClass("error") });
+        });
+    </script>
+    <script src="{% static 'jquery.rut.js' %}"></script>
+    <script src="../../users_app/static/jquery.rut.js"></script>
+</body>
+
+
+
+
+</html>

@@ -1,0 +1,109 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Demanda</title>
+</head>
+
+<body>
+    <div class="container">
+       
+        {% include "user_bar.html" %}
+        <a href="/">Atrás</a>
+        <div class="row">
+            <h4 class="text-center">Dashboard {{this_user.type.type_name}}</h4>
+            <h5 class="text-center">Demanda ID, {{this_lawsuit.id}} creada por
+                {{this_lawsuit.lawsuit_created_by.first_name1}} {{this_lawsuit.lawsuit_created_by.last_name1}}</h5>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto  bg-light p-3">
+                <p>Nombres : {{this_defendant.first_name1}} {{this_defendant.first_name2}}</p>
+                <p>Apellidos : {{this_defendant.last_name1}} {{this_defendant.last_name2}}</p>
+                <p>Rut :{{this_defendant.rut}}</p>
+                <p>Dirección: {{this_defendant.address}} </p>
+                <p>Causa Rol :  {% if this_lawsuit.cause_rol == "C-" %} 
+                         No asignado 
+                    {% else %} 
+                        {{this_lawsuit.cause_rol}} 
+                    {% endif %}</p>
+                <p>Tribunal : {{this_lawsuit.current_court}}</p>
+            </div>
+
+            <div class="col-auto  bg-light p-3">
+                <p>Numero Pagaré : {{this_lawsuit.num_promissory_notes}}</p>
+                <p>Fecha Mora : {{this_lawsuit.final_date}}</p>
+                <p>Monto de Pagaré : ${{this_lawsuit.mount_to_pay}}</p>
+                <p>Número de operación : {{this_lawsuit.num_operation}}</p>
+                <p>Fecha Suscripción Pagaré: {{this_lawsuit.suscription_date}}</p>
+                <p>Cuantía de la Demanda: ${{this_lawsuit.demand_amount}}</p>
+            </div>
+            <!-- formulario ingresar estado de la demanda -->
+           
+            <div class="row justify-content-center mt-4" {{hidden}}>
+                <h5 class="text-center">Notificar avance de la causa</h5>
+                <form action="/procuradora/lawsuit_detail/update_lawsuit_state/{{this_lawsuit.id}}" method="post"
+                    class="col-auto border p-2 rounded" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="">
+                        {{new_movement_form.as_p}}
+                    </div>
+
+                    <div class="">
+                        {{document_form}}
+                    </div>
+
+
+                    <button type='submit' class="btn btn-primary col-auto m-2" {{hidden}}>Registrar Movimiento</button>
+                </form>
+
+            </div>
+           
+
+        </div>
+        
+        <a href="/">Atrás</a>
+
+        <div class="row">
+            <h4>Historial de la demanda</h4>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Estado anterior</th>
+                        <th scope="col"></th>
+                        <th scope="col">Estado actual</th>
+                        <th scope="col">Movimiento Hecho por:</th>
+                        <th scope="col">Documento:</th>
+                        <th scope="col">Fecha Movimiento:</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for history in this_lawsuit_history.all|dictsort:"created_at" %}
+                    <tr>
+
+                        <td>{{history.past_state.name_state}}</td>
+                        <td>---></td>
+                        <td>{{history.current_state.name_state}}</td>
+                        <td>{{history.change_made_by.first_name1}} {{history.change_made_by.last_name1}}</td>
+                        <td> {% if history.docfile.name %}<a href="/media/{{history.docfile.name}}">Ver Documento</a> {% endif %}</td>
+                        <td>{% timezone "America/Santiago" %} {{lawsuit.created_at| date:"m/d/Y"}} {% endtimezone  %} </td>
+                        <td>{% timezone "America/Santiago" %}  {{history.created_at| date:"m/d/Y"}} {% endtimezone  %}</td>
+                        
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+
+        </div>
+        <a href="/">Atrás</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+    <ul>
+        <br>
+        <br>
+        <li>Materia : COBRO DE PAGARE COD:C 07</li>
+        <li>Materia : EJECUTIVO</li>
+        <br>
+        <li>Demandante : Banco Dojo Bank</li>
+        <li>RUT : 78.907.435-1</li>
+        <li>Representante : Fernando Salazar Moreno</li>
+        <li>RUT: 7.890.098-1</li>
+        <br>
+        <li>A.Patrocinante : María Luisa Ahumada Leiva</li>
+        <li>RUT: 6.890.908-1</li>
+        <br>
+        <li>Demandado: {{defendant.first_name1}} {{defendant.first_name2}} {{defendant.last_name1}} {{defendant.last_name2}}</li>
+        <li>RUT : {{ defendant.rut }}</li>
+        <li>F.Ingreso Oficina : {{lawsuit.created_at| date:"m/d/Y"}} </li>
+        <li>Nº de Operación : {{ lawsuit.num_operation }}</li>
+
+    </ul>
+        <br>
+        <br>
+    <p><strong>EN LO PRINCIPAL:</strong>DEMANDA EJECUTIVA. <strong>PRIMER OTROSI:</strong> SEÑALA BIENES PARA LA TRABA DE EMBARGO.
+        <strong>SEGUNDO OTROSI:</strong> ACOMPAÑA DOCUMENTO, CON CITACION. <strong>TERCER OTROSI:</strong> SE TENGA PRESENTE.
+        S.J.L. EN LO CIVIL
+        <br>
+        <br>
+        <strong>Fernando Salazar Moreno</strong>, chileno, abogado, Empleado Bancario,
+        cédula nacional de identidad <strong>7.890.098-1</strong> , actuando en representacion del Banco
+        del Estado de Chile, Empresa autónoma del Estado, representado Legalmente por su Gerente General Ejecutivo, don
+        Juan Cooper Alvarez, según se acreditará, ambos con domicilio en calle San Diego N°81, Piso 8, comuna de Santiago
+        a U.S. respetuosamente digo:
+        <br>
+        <br>
+        El Banco del Estado es dueño del Pagaré Tarjeta de Crédito N° <strong> {{lawsuit.num_promissory_notes}} </strong>, asignado con la
+        Operación Nº <strong> {{num_operation}} </strong>, que se acompaña, por un monto original ascendente a
+        $<strong> {{lawsuit.mount_to_pay}} </strong> y suscrito el <strong> {{lawsuit.suscription_date| date:"m/d/Y"}} </strong> por don(ña) <strong> {{defendant.first_name1}} {{defendant.first_name2}} {{defendant.last_name1}} {{defendant.last_name2}}</strong>
+        , chileno(a), ignoro profesión u oficio, domiciliado (a) en <strong> {{defendant.address}} </strong>
+        <br>
+        <br>
+        Doy por expresamente reproducido el Pagaré‚ ya citado.
+        En el Pagaré‚ se señala que el deudor se comprometió a pagar la cantidad referida a mi
+        
+        representada en una sola cuota, con vencimiento el día <strong> {{lawsuit.final_date| date:"m/d/Y"}} </strong> .
+        
+        Es del caso que el deudor (a) no pagó lo estipulado con fecha <strong> {{lawsuit.final_date| date:"m/d/Y"}} </strong> .
+        En el pagaré, el deudor se comprometió a que en caso de incumplimiento de la obligación, pagaría
+        
+        intereses penales del máximo convencional a las tasas que rigiesen durante el retardo.
+        
+        El Banco fue liberado de la obligación de protestar el documento y éste fue suscrito ante Notario.
+        El pago del impuesto de timbres y estampillas del pagaré‚ que fundamenta esta demanda se pagó
+        mediante ingresos en dinero enterados en Tesorería, de acuerdo a lo dispuesto al Artículo 15 Nº3 del D.L.3475 de
+        1980.
+        <br>
+        <br>
+        La deuda es plenamente exigible, líquida y su acción no está  prescrita.
+        <br>
+        <strong>P O R T A N T O:</strong> en conformidad con lo expuesto, y lo que señala el Art. 254 y 434 y siguientes
+        del Código de Procedimiento Civil,
+        <br>
+        <br>
+        <strong>SIRVASE S.S.</strong>, tener por deducida demanda Ejecutiva de cobro de Pagar‚ en contra de don
+        <strong> {{defendant.first_name1}} {{defendant.first_name2}} {{defendant.last_name1}} {{defendant.last_name2}}</strong> , ya individualizado(a), admitirla a tramitación y ordenar que se le
+        requiera de pago y se despache mandamiento de ejecución y embargo en su contra por el total de $<strong> {{lawsuit.demand_amount}} </strong> .-
+        , que es la suma a la cual está reducida la deuda al día de la mora; más los intereses penales máximos que la Ley
+        permita estipular, calculados desde la fecha del incumplimiento o retardo hasta la fecha del pago efectivo de lo
+        debido, y las costas de la causa; bajo el apercibimiento de embargárseles bienes suficientes y continuar con la
+        ejecución hasta obtener el pago total de la deuda.
+        <br>
+        <br>
+        
+        <strong>PRIMER OTROSI:</strong> Vengo en señalar como bienes para la traba del embargo todos los bienes muebles e inmuebles,
+        presentes o futuros que guarnecen o guarnezcan el domicilio de la ejecutada, los que quedarán en poder del deudor
+        en su calidad de depositario provisional, bajo las responsabilidades legales correspondientes.
+        <br>
+        <br>
+        <strong>SEGUNDO OTROSI:</strong> Ruego tener por acompañado con citación el Pagaré, ya singularizado y ordenar su custodia
+        en la Caja de Fondos del Tribunal.
+        <br>
+        <br>
+        <strong>TERCER OTROSI:</strong> Sírvase SS. tener presente que mi personería consta de las copias autorizadas de Delegación de
+        Mandato y Mandato consta en escritura publica de fecha 18 de Julio de 2018, otorgada en la notaria de Santiago de
+        don Alvaro Gonzalez Salinas, firmada a travez de firma electronica avanzada, documento que se acompaña en PDF a
+        estos autos. Asimismo, Sírvase V.S. tener presente que designo abogado patrocinante y confiero poder al abogado
+        Christian Bravo Bustos, habilitado para el ejercicio de la profesión, domiciliado en calle Pedro Pablo Muñoz 420
+        oficina 12, La Serena, firmando en señal de aceptación.</p>
+
+
+    </div>
+    <br>
+    <br>
+    <!-- <div>
+        <div style="margin-left: 100px;">Fernando Salazar Moreno &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; María Luisa Ahumada Leiva  </div>
+        <div style="margin-left: 130px;">7.890.098-1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.890.908-1</div>                
+    </div> -->
+   
+
+    <table>
+        <tr>
+            <td><div class="float" style="margin-left: 100px;"> Fernando Salazar Moreno</div></td>
+            <td><div class="float" style="margin-left: 130px;"> María Luisa Ahumada Leiva </div></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td><div class="float" style="margin-left: 130px;"> 7.890.098-1</div></td>
+            <td><div class="float" style="margin-left: 160px;"> 6.890.908-1 </div></td>
+        </tr>
+    </table>
+    
+</body>
+</html>

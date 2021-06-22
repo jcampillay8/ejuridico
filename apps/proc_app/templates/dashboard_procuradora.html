@@ -1,0 +1,110 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procuradora  </title>
+</head>
+
+<body>
+    <div class="container">
+        {% include "user_bar.html" %}
+
+        <div class="row">
+            <h4 class="text-center">Dashboard {{this_user.type.type_name}}</h4>
+        </div>
+
+
+        <table class="table">
+            <h3 class="text-center">Demandas pendientes: </h3>
+            <thead>
+                <tr>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Rut</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Causa Rol</th>
+                    <th scope="col">Tribunal</th>
+                    <th scope="col">Fecha Escrito</th>
+                    <th scope="col">Creada por</th>
+                    <th scope="col">Acción</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for lawsuit in all_pending_lawsuits|dictsort:"created_at" %}
+        
+                <tr>
+
+
+                    <td>{{lawsuit.current_defendant.first_name1}} {{lawsuit.current_defendant.first_name2}}</td>
+                    <td>{{lawsuit.current_defendant.last_name1}} {{lawsuit.current_defendant.last_name2}}</td>
+                    <td>{{lawsuit.current_defendant.rut}}</td>
+                    <td>{{lawsuit.current_demand_state.name_state}}</td>
+                    <td>{{lawsuit.cause_rol}}</td>
+                    <td>{{lawsuit.current_court.name_court}}</td>
+                    <td> {% timezone "America/Santiago" %} {{lawsuit.created_at| date:"m/d/Y"}} {% endtimezone  %}</td>
+                    <td>{{lawsuit.lawsuit_created_by.first_name1}} {{lawsuit.lawsuit_created_by.last_name1}}</td>
+                    <td><a href="lawsuit_detail/{{lawsuit.id}}">Detalle</a></td>
+
+                </tr>
+           
+                {% endfor%}
+
+            </tbody>
+
+        </table>
+
+
+        <div class="text-center text-muted">(Ordenados del más antiguo)</div>
+
+        <table class="table">
+            <h3 class="text-center">Todas demandas: </h3>
+            <thead>
+                <tr>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Rut</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Causa Rol</th>
+                    <th scope="col">Tribunal</th>
+                    <th scope="col">Fecha Escrito</th>
+                    <th scope="col">Creada por</th>
+                    <th scope="col">Acción</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for lawsuit in all_lawsuits.all|dictsort:"created_at" %}
+                <tr>
+
+                    <td>{{lawsuit.current_defendant.first_name1}} {{lawsuit.current_defendant.first_name2}}</td>
+                    <td>{{lawsuit.current_defendant.last_name1}} {{lawsuit.current_defendant.last_name2}}</td>
+                    <td>{{lawsuit.current_defendant.rut}}</td>
+                    <td>{{lawsuit.current_demand_state.name_state}}</td>
+                    <td>{{lawsuit.cause_rol}}</td>
+                    <td>{{lawsuit.current_court.name_court}}</td>
+                    <td> {% timezone "America/Santiago" %} {{lawsuit.created_at| date:"m/d/Y"}} {% endtimezone  %}</td>
+                    <td>{{lawsuit.lawsuit_created_by.first_name1}} {{lawsuit.lawsuit_created_by.last_name1}}</td>
+                    <td><a href="lawsuit_detail/{{lawsuit.id}}">Detalle</a></td>
+
+        
+                   
+
+
+                </tr>
+                {% endfor%}
+
+            </tbody>
+
+        </table>
+    </div>
+
+</body>
+
+</html>

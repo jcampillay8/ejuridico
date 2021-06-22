@@ -1,0 +1,22 @@
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<link rel='shortcut icon' type='image/x-icon' href="{% static 'img/favicon.ico' %}" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<div class="row bg-dark p-4">
+    <h2 class="text-center text-white">E-Jurídico</h2>
+</div>
+<div class="row bg-light py-1">
+    <div class="col-4 text-center">
+        <span>Hola {{this_administrator.first_name1}} {{this_administrator.last_name1}}  {{this_user.first_name1}} {{this_user.last_name1}}</span>
+
+    </div>
+
+    <div class="col-8 text-center ">
+        <a href="/logout">Cerrar Sesión</a>
+
+
+    </div>
+</div>
+{% endblock %}
